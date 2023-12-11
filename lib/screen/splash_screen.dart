@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:potenday/screen/home_screen.dart';
+import 'package:potenday/screen/DatePick_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
