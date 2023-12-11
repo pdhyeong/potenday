@@ -1,6 +1,9 @@
+//DatePick_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:potenday/screen/JobPick_screen.dart';
 
 class BirthDatePicker extends StatelessWidget {
   final void Function(DateTime) onDateTimeChanged;
@@ -71,6 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 onPressed: () {
                   print(selectedDate.toString().substring(0, 15));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (_) => const JobPickScreen(),
+                  ));
                 },
                 child: const Text('다음 단계',
                     style: TextStyle(
@@ -85,11 +91,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.black,
                   backgroundColor: Colors.white, // Set text color to black
-                  side: const BorderSide(color: Colors.black),
+                  side: const BorderSide(color: Colors.black26),
                   fixedSize: const Size(95, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
                 onPressed: () {
                   print('Button pressed ...');
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (_) => const JobPickScreen(),
+                  ));
                 },
                 child: const Text('건너뛰기',
                     style: TextStyle(
@@ -111,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const Align(
               alignment: AlignmentDirectional(-0.80, -0.30),
               child: Text(
-                '딱 맞는 메시지 생성에 도움이 되요!',
+                '딱 맞는 메시지 생성에 도움이 돼요!',
                 style: TextStyle(
                   fontSize: 16,
                 ),
