@@ -17,7 +17,7 @@ class BirthDatePicker extends StatelessWidget {
     final initDate =
         DateFormat('yyyy-MM-dd').parse(initDateStr ?? '2000-01-01');
     return SizedBox(
-      height: 200,
+      height: 150,
       width: 300,
       child: CupertinoDatePicker(
         minimumYear: 1900,
@@ -61,19 +61,41 @@ class _HomeScreenState extends State<HomeScreen> {
             Align(
               alignment: const AlignmentDirectional(0.00, 0.80),
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.black12,
+                  fixedSize: const Size(361, 45),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 onPressed: () {
-                  print(selectedDate.toString().substring(0, 10));
+                  print(selectedDate.toString().substring(0, 15));
                 },
-                child: const Text('다음 단계'),
+                child: const Text('다음 단계',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                    )),
               ),
             ),
             Align(
               alignment: const AlignmentDirectional(0.90, -0.90),
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.white, // Set text color to black
+                  side: const BorderSide(color: Colors.black),
+                  fixedSize: const Size(95, 50),
+                ),
                 onPressed: () {
                   print('Button pressed ...');
                 },
-                child: const Text('건너뛰기'),
+                child: const Text('건너뛰기',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    )),
               ),
             ),
             const Align(
@@ -81,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text(
                 '생년월일을 알려주세요',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 30,
                   fontWeight: FontWeight.w600,
                 ),
               ),
