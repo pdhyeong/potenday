@@ -152,22 +152,6 @@ class _JobPickScreenState extends State<JobPickScreen> {
         child: Stack(
           children: [
             Align(
-              alignment: const AlignmentDirectional(-0.9, -0.9),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.black12,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text("뒤로 가기"),
-              ),
-            ),
-            Align(
               alignment: const AlignmentDirectional(0.00, 0.80),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
