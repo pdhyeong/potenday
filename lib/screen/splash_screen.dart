@@ -41,9 +41,8 @@ class _SplashScreenState extends State<SplashScreen>
           children: [
             Image.asset(
               'assets/images/logo.png', // 이미지 경로에 맞게 수정
-              width: 80,
-              height: 80,
-              color: Colors.white,
+              width: 300,
+              height: 300,
             ),
             const SizedBox(
               height: 20,
