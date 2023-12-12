@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 onPressed: () {
                   print(selectedDate.toString().substring(0, 15));
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => const JobPickScreen(),
                   ));
                 },
@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 onPressed: () {
                   print('Button pressed ...');
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => const JobPickScreen(),
                   ));
                 },

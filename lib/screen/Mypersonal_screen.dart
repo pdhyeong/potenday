@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:potenday/screen/login_screen.dart';
+import 'package:potenday/screen/JobPick_screen.dart';
 
 class MypersonalScreen extends StatefulWidget {
   const MypersonalScreen({super.key});
@@ -79,7 +80,7 @@ class MypersonalScreenState extends State<MypersonalScreen> {
                     selectedJob = customJobController.text;
                   });
                   print('Selected Job: $selectedJob');
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => const LoginScreen(),
                   ));
                 } else {
@@ -113,7 +114,7 @@ class MypersonalScreenState extends State<MypersonalScreen> {
 
   void navigateToNextPage() {
     if (selectedJob.isNotEmpty) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
+      Navigator.of(context).push(MaterialPageRoute(
         builder: (_) => const LoginScreen(),
       ));
     } else {
@@ -202,7 +203,7 @@ class MypersonalScreenState extends State<MypersonalScreen> {
                 ),
                 onPressed: () {
                   print(selectedJob);
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => const LoginScreen(),
                   ));
                 },
@@ -240,7 +241,6 @@ class MypersonalScreenState extends State<MypersonalScreen> {
                 children: [
                   buildJobButton('😆 활기찬'),
                   buildJobButton('🥰 다정한'),
-                  buildJobButton('😆 활기찬'),
                   buildJobButton('🙇‍♂ 예의바른'),
                   buildJobButton('🧐 꼼꼼한'),
                   buildJobButton('🤐 과묵한'),

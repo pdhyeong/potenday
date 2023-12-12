@@ -80,7 +80,7 @@ class _JobPickScreenState extends State<JobPickScreen> {
                     selectedJob = customJobController.text;
                   });
                   print('Selected Job: $selectedJob');
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => const MypersonalScreen(),
                   ));
                 } else {
@@ -114,7 +114,7 @@ class _JobPickScreenState extends State<JobPickScreen> {
 
   void navigateToNextPage() {
     if (selectedJob.isNotEmpty) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
+      Navigator.of(context).push(MaterialPageRoute(
         builder: (_) => const MypersonalScreen(),
       ));
     } else {
@@ -203,7 +203,7 @@ class _JobPickScreenState extends State<JobPickScreen> {
                 ),
                 onPressed: () {
                   print(selectedJob);
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => const LoginScreen(),
                   ));
                 },
