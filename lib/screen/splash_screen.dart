@@ -33,36 +33,24 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.blue, Colors.purple],
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
+      body: Container(
+        width: double.infinity,
+        color: const Color.fromARGB(255, 255, 210, 48),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/logo.png', // 이미지 경로에 맞게 수정
+              width: 80,
+              height: 80,
+              color: Colors.white,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+          ],
         ),
       ),
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.edit,
-            size: 80,
-            color: Colors.white,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            '구구절절',
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
-              color: Colors.white,
-              fontSize: 32,
-            ),
-          ),
-        ],
-      ),
-    ));
+    );
   }
 }
