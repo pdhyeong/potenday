@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen>
             height: 20,
           ),
           Text(
-            '대신 문자 전해주는 서비스',
+            '구구절절',
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white,

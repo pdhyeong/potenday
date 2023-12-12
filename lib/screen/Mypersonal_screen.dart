@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:potenday/screen/login_screen.dart';
-import 'package:potenday/screen/Mypersonal_screen.dart';
 
-class JobPickScreen extends StatefulWidget {
-  const JobPickScreen({Key? key}) : super(key: key);
+class MypersonalScreen extends StatefulWidget {
+  const MypersonalScreen({super.key});
 
   @override
-  _JobPickScreenState createState() => _JobPickScreenState();
+  State<MypersonalScreen> createState() => MypersonalScreenState();
 }
 
-class _JobPickScreenState extends State<JobPickScreen> {
+class MypersonalScreenState extends State<MypersonalScreen> {
   String selectedJob = '';
   TextEditingController customJobController = TextEditingController();
 
@@ -81,7 +80,7 @@ class _JobPickScreenState extends State<JobPickScreen> {
                   });
                   print('Selected Job: $selectedJob');
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (_) => const MypersonalScreen(),
+                    builder: (_) => const LoginScreen(),
                   ));
                 } else {
                   // Show a warning if the input is empty
@@ -115,7 +114,7 @@ class _JobPickScreenState extends State<JobPickScreen> {
   void navigateToNextPage() {
     if (selectedJob.isNotEmpty) {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => const MypersonalScreen(),
+        builder: (_) => const LoginScreen(),
       ));
     } else {
       // Show a warning or perform any other action
@@ -215,9 +214,9 @@ class _JobPickScreenState extends State<JobPickScreen> {
               ),
             ),
             const Align(
-              alignment: AlignmentDirectional(-0.80, -0.40),
+              alignment: AlignmentDirectional(-0.60, -0.40),
               child: Text(
-                '어떤 사람인가요?',
+                '어떤 사람으로 보이고 싶은가요?',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w600,
@@ -241,6 +240,7 @@ class _JobPickScreenState extends State<JobPickScreen> {
                 children: [
                   buildJobButton('😆 활기찬'),
                   buildJobButton('🥰 다정한'),
+                  buildJobButton('😆 활기찬'),
                   buildJobButton('🙇‍♂ 예의바른'),
                   buildJobButton('🧐 꼼꼼한'),
                   buildJobButton('🤐 과묵한'),
