@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:potenday/screen/Target_screen.dart';
 
-class ChannelScreen extends StatelessWidget {
-  const ChannelScreen({super.key});
+class ReasonScreen extends StatelessWidget {
+  const ReasonScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,11 +28,7 @@ class ChannelScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => const TargetScreen(),
-                  ));
-                },
+                onPressed: () {},
                 child: const Text('카카오톡',
                     style: TextStyle(
                       fontSize: 20,
@@ -53,11 +48,7 @@ class ChannelScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => const TargetScreen(),
-                  ));
-                },
+                onPressed: () {},
                 child: const Text('문자',
                     style: TextStyle(
                       fontSize: 20,
@@ -77,11 +68,7 @@ class ChannelScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => const TargetScreen(),
-                  ));
-                },
+                onPressed: () {},
                 child: const Text('이메일',
                     style: TextStyle(
                       fontSize: 20,
@@ -101,11 +88,7 @@ class ChannelScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => const TargetScreen(),
-                  ));
-                },
+                onPressed: () {},
                 child: const Text('기타(협업툴)',
                     style: TextStyle(
                       fontSize: 20,
@@ -116,7 +99,7 @@ class ChannelScreen extends StatelessWidget {
             const Align(
               alignment: AlignmentDirectional(-0.70, -0.40),
               child: Text(
-                '어떤 채널로 전송할까요?',
+                '누구에게 메시지를 보내시나요?',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w600,
