@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:potenday/screen/Start_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  void _get_user_info() async {
+  void getUserinfo() async {
     try {
       User user = await UserApi.instance.me();
       print('사용자 정보 요청 성공'
@@ -63,14 +64,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     try {
                       await UserApi.instance.loginWithKakaoTalk();
                       print('카카오톡으로 로그인 성공');
-                      _get_user_info();
+                      // getUserinfo();
+                      String name;
+                      User user = await UserApi.instance.me();
+                      if (user.kakaoAccount != null) {
+                        name = user.kakaoAccount!.profile!.nickname!;
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => StartScreen(str: name),
+                        ));
+                      }
                     } catch (error) {
                       print('카카오톡으로 로그인 실패 $error');
                       // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인
                       try {
                         await UserApi.instance.loginWithKakaoAccount();
                         print('카카오계정으로 로그인 성공');
-                        _get_user_info();
+                        getUserinfo();
                       } catch (error) {
                         print('카카오계정으로 로그인 실패 $error');
                       }
@@ -79,7 +88,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     try {
                       await UserApi.instance.loginWithKakaoAccount();
                       print('카카오계정으로 로그인 성공');
-                      _get_user_info();
+                      getUserinfo();
+                      String name;
+                      User user = await UserApi.instance.me();
+                      if (user.kakaoAccount != null) {
+                        name = user.kakaoAccount!.profile!.nickname!;
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => StartScreen(str: name),
+                        ));
+                      }
                     } catch (error) {
                       print('카카오계정으로 로그인 실패 $error');
                     }
