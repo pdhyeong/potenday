@@ -6,7 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
 void main() {
-  KakaoSdk.init(nativeAppKey: "875118c1635e45b43f981cfa2fe8700f");
+  KakaoSdk.init(nativeAppKey: "1e56bed897ba5ca2e3688cb8122450c4");
   runApp(const MyApp());
 }
 
