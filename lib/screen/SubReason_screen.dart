@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:potenday/screen/LastQuestion_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:potenday/screen/SubReason_screen.dart';
 import 'package:potenday/main.dart';
@@ -10,6 +11,9 @@ class SubReasonScreen extends StatelessWidget {
     GlobalStore globalStore = Provider.of<GlobalStore>(context, listen: false);
     globalStore.arr[5] = target;
     print(globalStore.arr);
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (_) => const LastQuestionScreen(),
+    ));
   }
 
   void _showInputDialog(BuildContext context) {
