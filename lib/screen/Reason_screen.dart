@@ -33,7 +33,7 @@ class ReasonScreen extends StatelessWidget {
               if (enteredText.isNotEmpty) {
                 GlobalStore globalStore =
                     Provider.of<GlobalStore>(context, listen: false);
-                globalStore.arr[3] = enteredText;
+                globalStore.arr[4] = enteredText;
                 print(globalStore.arr);
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (_) => const ReasonScreen(),
@@ -95,9 +95,9 @@ class ReasonScreen extends StatelessWidget {
                 height: 50,
               ),
             ),
-            for (var i = 0; i < options.length; i++)
-              _buildElevatedButton(
-                  context, options[i].label, options[i].target, 0.15 * (i + 1)),
+            for (var i = options.length - 1; i >= 0; i--)
+              _buildElevatedButton(context, options[i].label, options[i].target,
+                  1.05 - 0.15 * (options.length - i)),
             const Align(
               alignment: AlignmentDirectional(-0.70, -0.40),
               child: Text(
@@ -131,9 +131,9 @@ class Option {
 }
 
 final List<Option> options = [
-  const Option(label: '👋안부', target: '👋안부'),
+  const Option(label: '👋 안부', target: '👋 안부'),
   const Option(label: '🎉 축하', target: '🎉 축하'),
-  const Option(label: '🙏 부탁 ', target: '🙏 부탁 '),
-  const Option(label: '❓질문', target: '❓질문'),
+  const Option(label: '🙏 부탁', target: '🙏 부탁'),
+  const Option(label: '❓ 질문', target: '❓ 질문'),
   const Option(label: '기타', target: '기타'),
 ];

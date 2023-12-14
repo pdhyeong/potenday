@@ -11,7 +11,7 @@ class ChannelScreen extends StatelessWidget {
     globalStore.arr[2] = channel;
     print(globalStore.arr);
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) => TargetScreen(),
+      builder: (_) => const TargetScreen(),
     ));
   }
 
@@ -53,19 +53,19 @@ class ChannelScreen extends StatelessWidget {
               ),
             ),
             Align(
-              alignment: const AlignmentDirectional(0.00, 0.4),
+              alignment: const AlignmentDirectional(0.00, 0.45),
               child: buildChannelButton(context, '💛카카오톡', '카카오톡'),
             ),
             Align(
-              alignment: const AlignmentDirectional(0.00, 0.55),
+              alignment: const AlignmentDirectional(0.00, 0.60),
               child: buildChannelButton(context, '💬문자', '문자'),
             ),
             Align(
-              alignment: const AlignmentDirectional(0.00, 0.7),
+              alignment: const AlignmentDirectional(0.00, 0.75),
               child: buildChannelButton(context, '📧이메일', '이메일'),
             ),
             Align(
-              alignment: const AlignmentDirectional(0.00, 0.85),
+              alignment: const AlignmentDirectional(0.00, 0.90),
               child: buildChannelButton(context, '기타(협업툴)', '협업툴'),
             ),
             const Align(
