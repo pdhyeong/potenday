@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:potenday/screen/login_screen.dart';
 import 'package:potenday/screen/Mypersonal_screen.dart';
+import 'package:potenday/main.dart';
+import 'package:provider/provider.dart';
 
 class JobPickScreen extends StatefulWidget {
   const JobPickScreen({Key? key}) : super(key: key);
@@ -80,6 +82,10 @@ class _JobPickScreenState extends State<JobPickScreen> {
                     selectedJob = customJobController.text;
                   });
                   print('Selected Job: $selectedJob');
+                  GlobalStore globalStore =
+                      Provider.of<GlobalStore>(context, listen: false);
+                  globalStore.arr[0] = selectedJob;
+                  print(globalStore.arr);
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => const MypersonalScreen(),
                   ));
@@ -114,6 +120,10 @@ class _JobPickScreenState extends State<JobPickScreen> {
 
   void navigateToNextPage() {
     if (selectedJob.isNotEmpty) {
+      GlobalStore globalStore =
+          Provider.of<GlobalStore>(context, listen: false);
+      globalStore.arr[0] = selectedJob;
+      print(globalStore.arr);
       Navigator.of(context).push(MaterialPageRoute(
         builder: (_) => const MypersonalScreen(),
       ));
@@ -186,7 +196,10 @@ class _JobPickScreenState extends State<JobPickScreen> {
                   ),
                 ),
                 onPressed: () {
-                  print(selectedJob);
+                  GlobalStore globalStore =
+                      Provider.of<GlobalStore>(context, listen: false);
+                  globalStore.arr[0] = "";
+                  print(globalStore.arr);
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => const LoginScreen(),
                   ));
