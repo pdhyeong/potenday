@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:potenday/screen/login_screen.dart';
 import 'package:potenday/screen/JobPick_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:potenday/main.dart';
 
 class MypersonalScreen extends StatefulWidget {
   const MypersonalScreen({super.key});
@@ -80,6 +82,10 @@ class MypersonalScreenState extends State<MypersonalScreen> {
                     selectedJob = customJobController.text;
                   });
                   print('Selected Job: $selectedJob');
+                  GlobalStore globalStore =
+                      Provider.of<GlobalStore>(context, listen: false);
+                  globalStore.arr[1] = selectedJob;
+                  print(globalStore.arr);
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => const LoginScreen(),
                   ));
@@ -90,7 +96,7 @@ class MypersonalScreenState extends State<MypersonalScreen> {
                     builder: (BuildContext context) {
                       return AlertDialog(
                         title: const Text('경고'),
-                        content: const Text('주입할 성격을 선택해주세요.'),
+                        content: const Text('원하는 성격을 선택해주세요.'),
                         actions: [
                           ElevatedButton(
                             onPressed: () {
@@ -114,6 +120,10 @@ class MypersonalScreenState extends State<MypersonalScreen> {
 
   void navigateToNextPage() {
     if (selectedJob.isNotEmpty) {
+      GlobalStore globalStore =
+          Provider.of<GlobalStore>(context, listen: false);
+      globalStore.arr[1] = selectedJob;
+      print(globalStore.arr);
       Navigator.of(context).push(MaterialPageRoute(
         builder: (_) => const LoginScreen(),
       ));
@@ -152,22 +162,6 @@ class MypersonalScreenState extends State<MypersonalScreen> {
         child: Stack(
           children: [
             Align(
-              alignment: const AlignmentDirectional(-0.9, -0.9),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.black12,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text("뒤로 가기"),
-              ),
-            ),
-            Align(
               alignment: const AlignmentDirectional(0.00, 0.80),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -203,6 +197,10 @@ class MypersonalScreenState extends State<MypersonalScreen> {
                 ),
                 onPressed: () {
                   print(selectedJob);
+                  GlobalStore globalStore =
+                      Provider.of<GlobalStore>(context, listen: false);
+                  globalStore.arr[1] = "";
+                  print(globalStore.arr);
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => const LoginScreen(),
                   ));
