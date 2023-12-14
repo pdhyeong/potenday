@@ -34,7 +34,7 @@ class ChannelScreen extends StatelessWidget {
                     builder: (_) => const TargetScreen(),
                   ));
                 },
-                child: const Text('카카오톡',
+                child: const Text('💛카카오톡',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
@@ -58,7 +58,7 @@ class ChannelScreen extends StatelessWidget {
                     builder: (_) => const TargetScreen(),
                   ));
                 },
-                child: const Text('문자',
+                child: const Text('💬문자',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
@@ -82,7 +82,7 @@ class ChannelScreen extends StatelessWidget {
                     builder: (_) => const TargetScreen(),
                   ));
                 },
-                child: const Text('이메일',
+                child: const Text('📧이메일',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
