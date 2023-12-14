@@ -11,7 +11,7 @@ class ChannelScreen extends StatelessWidget {
     globalStore.arr[2] = channel;
     print(globalStore.arr);
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) => const TargetScreen(),
+      builder: (_) => TargetScreen(),
     ));
   }
 
