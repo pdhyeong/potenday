@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:potenday/screen/Reason_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:potenday/main.dart';
+import 'package:potenday/screen/ExportText_screen.dart';
 
 class LastQuestionScreen extends StatelessWidget {
   const LastQuestionScreen({Key? key}) : super(key: key);
@@ -9,6 +10,9 @@ class LastQuestionScreen extends StatelessWidget {
   void _navigateToReasonScreen(BuildContext context, String target) {
     GlobalStore globalStore = Provider.of<GlobalStore>(context, listen: false);
     print(globalStore.arr);
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (_) => const ExportTextScreen(),
+    ));
   }
 
   void _showInputDialog(BuildContext context) {
