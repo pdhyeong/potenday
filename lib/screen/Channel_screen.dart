@@ -1,8 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:potenday/screen/Target_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:potenday/main.dart';
 
 class ChannelScreen extends StatelessWidget {
-  const ChannelScreen({super.key});
+  const ChannelScreen({Key? key}) : super(key: key);
+
+  void handleButtonPressed(BuildContext context, String channel) {
+    GlobalStore globalStore = Provider.of<GlobalStore>(context, listen: false);
+    globalStore.arr[2] = channel;
+    print(globalStore.arr);
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (_) => const TargetScreen(),
+    ));
+  }
+
+  ElevatedButton buildChannelButton(
+      BuildContext context, String label, String channel) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.white,
+        fixedSize: const Size(361, 45),
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(width: 1, color: Colors.black),
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      onPressed: () => handleButtonPressed(context, channel),
+      child: Text(
+        label,
+        style: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,99 +54,19 @@ class ChannelScreen extends StatelessWidget {
             ),
             Align(
               alignment: const AlignmentDirectional(0.00, 0.4),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  fixedSize: const Size(361, 45),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 1, color: Colors.black),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => const TargetScreen(),
-                  ));
-                },
-                child: const Text('💛카카오톡',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                    )),
-              ),
+              child: buildChannelButton(context, '💛카카오톡', '카카오톡'),
             ),
             Align(
               alignment: const AlignmentDirectional(0.00, 0.55),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  fixedSize: const Size(361, 45),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 1, color: Colors.black),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => const TargetScreen(),
-                  ));
-                },
-                child: const Text('💬문자',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                    )),
-              ),
+              child: buildChannelButton(context, '💬문자', '문자'),
             ),
             Align(
               alignment: const AlignmentDirectional(0.00, 0.7),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  fixedSize: const Size(361, 45),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 1, color: Colors.black),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => const TargetScreen(),
-                  ));
-                },
-                child: const Text('📧이메일',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                    )),
-              ),
+              child: buildChannelButton(context, '📧이메일', '이메일'),
             ),
             Align(
               alignment: const AlignmentDirectional(0.00, 0.85),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  fixedSize: const Size(361, 45),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 1, color: Colors.black),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => const TargetScreen(),
-                  ));
-                },
-                child: const Text('기타(협업툴)',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                    )),
-              ),
+              child: buildChannelButton(context, '기타(협업툴)', '협업툴'),
             ),
             const Align(
               alignment: AlignmentDirectional(-0.70, -0.40),
