@@ -87,7 +87,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   } else {
                     try {
                       await UserApi.instance.loginWithKakaoAccount();
-                      print('카카오계정으로 로그인 성공');
+                      print(await UserApi.instance.accessTokenInfo());
+
                       getUserinfo();
                       String name;
                       User user = await UserApi.instance.me();

@@ -29,7 +29,7 @@ class ReasonScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: const Text('카카오톡',
+                child: const Text('💙일상',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
@@ -49,7 +49,7 @@ class ReasonScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: const Text('문자',
+                child: const Text('😷건강',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
@@ -69,7 +69,7 @@ class ReasonScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: const Text('이메일',
+                child: const Text('🎄연말',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
@@ -89,7 +89,7 @@ class ReasonScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: const Text('기타(협업툴)',
+                child: const Text('☀️ 연초',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
@@ -99,7 +99,7 @@ class ReasonScreen extends StatelessWidget {
             const Align(
               alignment: AlignmentDirectional(-0.70, -0.40),
               child: Text(
-                '누구에게 메시지를 보내시나요?',
+                '어떤 안부 연락을 드릴까요?',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w600,
