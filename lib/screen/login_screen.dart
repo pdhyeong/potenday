@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:potenday/screen/Start_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -11,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   void getUserinfo() async {
     try {
       User user = await UserApi.instance.me();
@@ -19,6 +22,24 @@ class _LoginScreenState extends State<LoginScreen> {
           '\n닉네임: ${user.kakaoAccount?.profile?.nickname}');
     } catch (error) {
       print('사용자 정보 요청 실패 $error');
+    }
+  }
+
+  void signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser != null) {
+        print('name = ${googleUser.displayName}');
+        print('email = ${googleUser.email}');
+        print('id = ${googleUser.id}');
+        String name;
+        name = googleUser.displayName!;
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => StartScreen(str: name),
+        ));
+      }
+    } catch (error) {
+      print('Google Sign-In failed: $error');
     }
   }
 
@@ -64,7 +85,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     try {
                       await UserApi.instance.loginWithKakaoTalk();
                       print('카카오톡으로 로그인 성공');
-                      // getUserinfo();
                       String name;
                       User user = await UserApi.instance.me();
                       if (user.kakaoAccount != null) {
@@ -75,7 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     } catch (error) {
                       print('카카오톡으로 로그인 실패 $error');
-                      // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인
                       try {
                         await UserApi.instance.loginWithKakaoAccount();
                         print('카카오계정으로 로그인 성공');
@@ -88,7 +107,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     try {
                       await UserApi.instance.loginWithKakaoAccount();
                       print(await UserApi.instance.accessTokenInfo());
-
                       getUserinfo();
                       String name;
                       User user = await UserApi.instance.me();
@@ -103,11 +121,37 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   }
                 },
-                child: const Text('카카오 로그인',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    )),
+                child: const Text(
+                  '카카오 로그인',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0, 0.6),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.blue,
+                  side: const BorderSide(color: Colors.black26),
+                  fixedSize: const Size(400, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                onPressed: () {
+                  signInWithGoogle();
+                },
+                child: const Text(
+                  'Google 로그인',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
               ),
             ),
           ],
