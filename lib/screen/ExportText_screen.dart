@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class ExportTextScreen extends StatelessWidget {
   const ExportTextScreen({Key? key}) : super(key: key);
@@ -76,6 +77,7 @@ class ExportTextScreen extends StatelessWidget {
                 onPressed: () {
                   // Access the entered text using textEditingController.text
                   print('Entered Text: ${textEditingController.text}');
+                  Share.share(textEditingController.text);
                 },
                 child: const Text(
                   '메시지 보내기',
