@@ -43,6 +43,47 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  Widget googleSignInButton() {
+    return GestureDetector(
+      onTap: () {
+        signInWithGoogle();
+      },
+      child: Container(
+        width: 400,
+        height: 60,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.black26),
+        ),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0, right: 0.0),
+              child: Image.asset(
+                'assets/images/google.png',
+                width: 30,
+                height: 30,
+              ),
+            ),
+            const Expanded(
+              child: Center(
+                child: Text(
+                  'Google 로그인',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             const Align(
-              alignment: AlignmentDirectional(-0.83, -0.1),
+              alignment: AlignmentDirectional(-0.83, -0.13),
               child: Text(
                 '3초 가입으로 바로 시작해보세요',
                 style: TextStyle(
@@ -70,17 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Align(
               alignment: const AlignmentDirectional(0, 0.4),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.yellow,
-                  side: const BorderSide(color: Colors.black26),
-                  fixedSize: const Size(400, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                onPressed: () async {
+              child: GestureDetector(
+                onTap: () async {
                   if (await isKakaoTalkInstalled()) {
                     try {
                       await UserApi.instance.loginWithKakaoTalk();
@@ -121,38 +153,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   }
                 },
-                child: const Text(
-                  '카카오 로그인',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
+                child: Image.asset(
+                  'assets/images/kakao.png',
+                  width: 400,
+                  height: 100,
                 ),
               ),
             ),
             Align(
               alignment: const AlignmentDirectional(0, 0.6),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.blue,
-                  side: const BorderSide(color: Colors.black26),
-                  fixedSize: const Size(400, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                onPressed: () {
-                  signInWithGoogle();
-                },
-                child: const Text(
-                  'Google 로그인',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
+              child: googleSignInButton(),
             ),
           ],
         ),
