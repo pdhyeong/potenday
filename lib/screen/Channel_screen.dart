@@ -3,36 +3,66 @@ import 'package:potenday/screen/Target_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:potenday/main.dart';
 
-class ChannelScreen extends StatelessWidget {
+class ChannelScreen extends StatefulWidget {
   const ChannelScreen({Key? key}) : super(key: key);
 
-  void handleButtonPressed(BuildContext context, String channel) {
+  @override
+  _ChannelScreenState createState() => _ChannelScreenState();
+}
+
+class _ChannelScreenState extends State<ChannelScreen> {
+  int selectedChannelIndex = -1;
+
+  void handleButtonPressed(BuildContext context, String channel, int index) {
     GlobalStore globalStore = Provider.of<GlobalStore>(context, listen: false);
     globalStore.arr[2] = channel;
     print(globalStore.arr);
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) => const TargetScreen(),
-    ));
+
+    Future.delayed(const Duration(milliseconds: 150), () {
+      setState(() {
+        selectedChannelIndex = -1;
+      });
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) => const TargetScreen(),
+      ));
+    });
   }
 
-  ElevatedButton buildChannelButton(
-      BuildContext context, String label, String channel) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
-        fixedSize: const Size(361, 45),
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 1, color: Colors.black),
+  Widget buildChannelButton(BuildContext context, String channel, int index) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          selectedChannelIndex = index;
+        });
+        handleButtonPressed(context, channel, index);
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        decoration: BoxDecoration(
+          color: selectedChannelIndex == index
+              ? const Color.fromARGB(255, 255, 210, 48)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: selectedChannelIndex == index
+                ? Colors.transparent
+                : Colors.black,
+            width: 1,
+          ),
         ),
-      ),
-      onPressed: () => handleButtonPressed(context, channel),
-      child: Text(
-        label,
-        style: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w400,
+        child: Container(
+          width: 361,
+          height: 45,
+          alignment: Alignment.center,
+          child: Text(
+            channel,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w400,
+              color:
+                  selectedChannelIndex == index ? Colors.white : Colors.black,
+            ),
+          ),
         ),
       ),
     );
@@ -52,22 +82,11 @@ class ChannelScreen extends StatelessWidget {
                 height: 50,
               ),
             ),
-            Align(
-              alignment: const AlignmentDirectional(0.00, 0.45),
-              child: buildChannelButton(context, '💛카카오톡', '카카오톡'),
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0.00, 0.60),
-              child: buildChannelButton(context, '💬문자', '문자'),
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0.00, 0.75),
-              child: buildChannelButton(context, '📧이메일', '이메일'),
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0.00, 0.90),
-              child: buildChannelButton(context, '기타(협업툴)', '협업툴'),
-            ),
+            for (var i = 0; i < channels.length; i++)
+              Align(
+                alignment: AlignmentDirectional(0.00, 0.45 + 0.15 * i),
+                child: buildChannelButton(context, channels[i], i),
+              ),
             const Align(
               alignment: AlignmentDirectional(-0.70, -0.40),
               child: Text(
@@ -92,3 +111,5 @@ class ChannelScreen extends StatelessWidget {
     );
   }
 }
+
+final List<String> channels = ['💛카카오톡', '💬문자', '📧이메일', '기타(협업툴)'];

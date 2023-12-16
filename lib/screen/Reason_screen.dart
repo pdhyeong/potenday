@@ -1,80 +1,99 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:potenday/screen/SubReason_screen.dart';
+import 'package:potenday/screen/LastQuestion_screen.dart';
 import 'package:potenday/main.dart';
 
-class ReasonScreen extends StatelessWidget {
+// ... (previous imports and code)
+
+class ReasonScreen extends StatefulWidget {
   const ReasonScreen({Key? key}) : super(key: key);
 
-  void _navigateToReasonScreen(BuildContext context, String target) {
+  @override
+  _ReasonScreenState createState() => _ReasonScreenState();
+}
+
+class _ReasonScreenState extends State<ReasonScreen> {
+  int selectedTargetIndex = -1;
+  TextEditingController textEditingController = TextEditingController();
+  FocusNode textFieldFocus = FocusNode();
+
+  void navigateToReasonScreen(BuildContext context, String target) {
     GlobalStore globalStore = Provider.of<GlobalStore>(context, listen: false);
     globalStore.arr[4] = target;
     print(globalStore.arr);
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) => const SubReasonScreen(),
-    ));
+    Future.delayed(const Duration(milliseconds: 150), () {
+      setState(() {
+        selectedTargetIndex = -1;
+      });
+      if (target == '👋 안부' ||
+          target == '🎉 축하' ||
+          target == '🙏 부탁' ||
+          target == '❓ 질문') {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => const SubReasonScreen(),
+        ));
+      } else {
+        globalStore.arr[5] = "";
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => const LastQuestionScreen(),
+        ));
+      }
+    });
   }
 
-  void _showInputDialog(BuildContext context) {
-    TextEditingController textEditingController = TextEditingController();
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('기타'),
-        content: TextField(
-          controller: textEditingController,
-          decoration: const InputDecoration(labelText: '기타 입력'),
-        ),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              String enteredText = textEditingController.text.trim();
-              if (enteredText.isNotEmpty) {
-                GlobalStore globalStore =
-                    Provider.of<GlobalStore>(context, listen: false);
-                globalStore.arr[4] = enteredText;
-                print(globalStore.arr);
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (_) => const ReasonScreen(),
-                ));
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('입력된 텍스트가 없습니다.'),
-                  ),
-                );
-              }
-            },
-            child: const Text('저장'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildElevatedButton(BuildContext context, String label, String target,
-      double verticalPosition) {
+  Widget buildElevatedButton(
+      BuildContext context, String label, double verticalPosition) {
     return Align(
       alignment: AlignmentDirectional(0.00, verticalPosition),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
-          fixedSize: const Size(361, 45),
-          shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 1, color: Colors.black),
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            selectedTargetIndex = options.indexWhere(
+              (option) => option.label == label,
+            );
+          });
+          if (label != '기타') {
+            navigateToReasonScreen(context, label);
+          }
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          decoration: BoxDecoration(
+            color: selectedTargetIndex ==
+                    options.indexWhere(
+                      (option) => option.label == label,
+                    )
+                ? const Color.fromARGB(255, 255, 210, 48)
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: selectedTargetIndex ==
+                      options.indexWhere(
+                        (option) => option.label == label,
+                      )
+                  ? Colors.transparent
+                  : Colors.black,
+              width: 1,
+            ),
           ),
-        ),
-        onPressed: label == '기타'
-            ? () => _showInputDialog(context)
-            : () => _navigateToReasonScreen(context, target),
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w400,
+          child: Container(
+            width: 361,
+            height: 45,
+            alignment: Alignment.center,
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+                color: selectedTargetIndex ==
+                        options.indexWhere(
+                          (option) => option.label == label,
+                        )
+                    ? Colors.white
+                    : Colors.black,
+              ),
+            ),
           ),
         ),
       ),
@@ -84,22 +103,21 @@ class ReasonScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: SafeArea(
-        child: Stack(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Align(
-              alignment: const AlignmentDirectional(-0.9, -0.9),
-              child: Image.asset(
-                'assets/images/logo_filled.png',
-                width: 70,
-                height: 50,
-              ),
-            ),
-            for (var i = options.length - 1; i >= 0; i--)
-              _buildElevatedButton(context, options[i].label, options[i].target,
-                  1.05 - 0.15 * (options.length - i)),
-            const Align(
-              alignment: AlignmentDirectional(-0.70, -0.40),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(
+                  16.0, 140.0, 16.0, 16.0), // Adjust the top padding value
               child: Text(
                 '무슨 이유로 메시지를 보내시나요?',
                 style: TextStyle(
@@ -108,12 +126,93 @@ class ReasonScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Align(
-              alignment: AlignmentDirectional(0.0, 0.05),
-              child: Wrap(
-                spacing: 10.0,
-                runSpacing: 10.0,
-                children: [],
+            Expanded(
+              child: SingleChildScrollView(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height -
+                      256, // Adjusted height
+                  child: Stack(
+                    children: [
+                      for (var i = 0; i < options.length; i++)
+                        buildElevatedButton(
+                          context,
+                          options[i].label,
+                          0.25 * (i - 1.5),
+                        ),
+                      if (selectedTargetIndex ==
+                          options.indexWhere((option) => option.label == '기타'))
+                        Align(
+                          alignment: AlignmentDirectional(
+                              0.0, 0.15 * (options.length + 0.7)),
+                          child: Container(
+                            width: 361,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: TextField(
+                              autofocus: true,
+                              controller: textEditingController,
+                              focusNode: textFieldFocus,
+                              onSubmitted: (value) {
+                                print('Submitted: $value');
+                                if (value != '') {
+                                  textEditingController.clear();
+                                  navigateToReasonScreen(context, value);
+                                }
+                              },
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
+                              ),
+                            ),
+                          ),
+                        ),
+                      if (selectedTargetIndex ==
+                          options.indexWhere((option) => option.label == '기타'))
+                        const Align(
+                          alignment: AlignmentDirectional(0.0, 0.05),
+                        )
+                      else
+                        Align(
+                          alignment: AlignmentDirectional(
+                              0.0, 0.15 * (options.length + 0.7)),
+                          child: Container(
+                            width: 361,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                      if (selectedTargetIndex ==
+                          options.indexWhere((option) => option.label == '기타'))
+                        const Align(
+                          alignment: AlignmentDirectional(0.0, 0.05),
+                        )
+                      else
+                        const Align(
+                          alignment: AlignmentDirectional(0.0, 0.05),
+                          child: Wrap(
+                            spacing: 10.0,
+                            runSpacing: 10.0,
+                            children: [],
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
@@ -121,19 +220,24 @@ class ReasonScreen extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    textFieldFocus.dispose();
+    super.dispose();
+  }
 }
 
 class Option {
   final String label;
-  final String target;
 
-  const Option({required this.label, required this.target});
+  const Option({required this.label}) : assert(label != '');
 }
 
 final List<Option> options = [
-  const Option(label: '👋 안부', target: '👋 안부'),
-  const Option(label: '🎉 축하', target: '🎉 축하'),
-  const Option(label: '🙏 부탁', target: '🙏 부탁'),
-  const Option(label: '❓ 질문', target: '❓ 질문'),
-  const Option(label: '기타', target: '기타'),
+  const Option(label: '👋 안부'),
+  const Option(label: '🎉 축하'),
+  const Option(label: '🙏 부탁'),
+  const Option(label: '❓ 질문'),
+  const Option(label: '기타'),
 ];
