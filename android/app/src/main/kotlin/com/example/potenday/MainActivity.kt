@@ -1,4 +1,4 @@
-package com.example.potenday
+package com.gugujuljul.potenday
 
 import io.flutter.embedding.android.FlutterActivity
 
