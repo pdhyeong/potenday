@@ -34,7 +34,7 @@ class SubReasonScreen extends StatelessWidget {
               if (enteredText.isNotEmpty) {
                 GlobalStore globalStore =
                     Provider.of<GlobalStore>(context, listen: false);
-                globalStore.arr[3] = enteredText;
+                globalStore.arr[5] = enteredText;
                 print(globalStore.arr);
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (_) => const SubReasonScreen(),
