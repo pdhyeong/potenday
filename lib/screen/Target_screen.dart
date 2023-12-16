@@ -122,12 +122,9 @@ class _TargetScreenState extends State<TargetScreen> {
                       256, // Adjusted height
                   child: Stack(
                     children: [
-                      for (var i = 0; i < options.length; i++)
-                        buildElevatedButton(
-                          context,
-                          options[i].label,
-                          0.25 * (i - 2.6),
-                        ),
+                      for (var i = options.length - 1; i >= 0; i--)
+                        buildElevatedButton(context, options[i].label,
+                            0.85 - 0.25 * (options.length - i)),
                       if (selectedTargetIndex ==
                           options.indexWhere((option) => option.label == '기타'))
                         Align(

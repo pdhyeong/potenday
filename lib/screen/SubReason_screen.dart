@@ -156,22 +156,22 @@ class SubReasonScreen extends StatelessWidget {
     String messageText = getMessageText(globalStore);
 
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: SafeArea(
         child: Stack(
           children: [
-            Align(
-              alignment: const AlignmentDirectional(-0.9, -0.9),
-              child: Image.asset(
-                'assets/images/logo_filled.png',
-                width: 70,
-                height: 50,
-              ),
-            ),
             for (var i = options.length - 1; i >= 0; i--)
               _buildElevatedButton(context, options[i].label, options[i].target,
                   1.05 - 0.15 * (options.length - i), globalStore),
             Align(
-              alignment: const AlignmentDirectional(-0.70, -0.40),
+              alignment: const AlignmentDirectional(-0.70, -0.60),
               child: Text(
                 messageText,
                 style: const TextStyle(
