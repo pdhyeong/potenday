@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 
 class ExportTextScreen extends StatelessWidget {
-  const ExportTextScreen({Key? key}) : super(key: key);
-
+  final String content;
+  const ExportTextScreen({required this.content, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final textEditingController = TextEditingController(
-        text:
-            '[홍길동/223055] 성적 관련 정정 요청\n안녕하세요. 교수님.\n홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다.  홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다.  홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다.  홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다. 홍길동입니다.  ');
+    final textEditingController = TextEditingController(text: content);
 
     return Scaffold(
       body: SafeArea(

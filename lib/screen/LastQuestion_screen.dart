@@ -12,11 +12,11 @@ class LastQuestionScreen extends StatelessWidget {
     return globalStore.arr;
   }
 
-  void _navigateToReasonScreen(BuildContext context, String target) {
+  void _navigateToReasonScreen(
+      BuildContext context, String target, String content) {
     GlobalStore globalStore = Provider.of<GlobalStore>(context, listen: false);
-    print(globalStore.arr);
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) => const ExportTextScreen(),
+      builder: (_) => ExportTextScreen(content: content),
     ));
   }
 
@@ -71,13 +71,13 @@ class LastQuestionScreen extends StatelessWidget {
         ),
         onPressed: label == '🙆 네, 더 있어요'
             ? () => _showInputDialog(context)
-            : () {
-                _navigateToReasonScreen(context, target);
+            : () async {
                 GlobalStore globalStore =
                     Provider.of<GlobalStore>(context, listen: false);
                 List<String> convertedData =
                     convertGlobalStoreToData(globalStore);
-                server.execute(convertedData);
+                String content = await server.execute(convertedData);
+                _navigateToReasonScreen(context, target, content);
               },
         child: Text(
           label,
