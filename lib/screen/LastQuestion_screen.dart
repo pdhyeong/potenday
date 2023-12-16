@@ -3,9 +3,14 @@ import 'package:potenday/screen/Reason_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:potenday/main.dart';
 import 'package:potenday/screen/ExportText_screen.dart';
+import 'package:potenday/Dart_server.dart';
 
 class LastQuestionScreen extends StatelessWidget {
   const LastQuestionScreen({Key? key}) : super(key: key);
+
+  List<String> convertGlobalStoreToData(GlobalStore globalStore) {
+    return globalStore.arr;
+  }
 
   void _navigateToReasonScreen(BuildContext context, String target) {
     GlobalStore globalStore = Provider.of<GlobalStore>(context, listen: false);
@@ -66,7 +71,14 @@ class LastQuestionScreen extends StatelessWidget {
         ),
         onPressed: label == '🙆 네, 더 있어요'
             ? () => _showInputDialog(context)
-            : () => _navigateToReasonScreen(context, target),
+            : () {
+                _navigateToReasonScreen(context, target);
+                GlobalStore globalStore =
+                    Provider.of<GlobalStore>(context, listen: false);
+                List<String> convertedData =
+                    convertGlobalStoreToData(globalStore);
+                server.execute(convertedData);
+              },
         child: Text(
           label,
           style: const TextStyle(
