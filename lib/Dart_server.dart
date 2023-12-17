@@ -19,27 +19,18 @@ class Server {
 
   Future<String> execute(List<String> arr) async {
     final dio = Dio();
-    final String prompt;
     final headers = {
       'X-NCP-CLOVASTUDIO-API-KEY': apiKey,
       'X-NCP-APIGW-API-KEY': apiKeyPrimaryVal,
       'Content-Type': 'application/json; charset=utf-8',
       'Accept': '*/*',
     };
-
-    switch (arr[2]) {
-      case "문자":
-        prompt = prompt =
-            "나의 성격 : ${arr[0]}, 남에게 보이고 싶은 성격: ${arr[1]}, 메시지 받는 사람 : ${arr[3]}, 목적: ${arr[4]}, 상세목적: ${arr[5]}, 덧붙일 말: ${arr[5]} 인데 70자 이하로 정성을 담은 메시지를 작성해줘.";
-      case "이메일":
-        prompt =
-            "나의 성격 : ${arr[0]}, 남에게 보이고 싶은 성격: ${arr[1]}, 메시지 받는 사람 : ${arr[3]}, 목적: ${arr[4]}, 상세목적: ${arr[5]}, 덧붙일 말: ${arr[5]} 인데 제목과 메시지를 구분하고 제목이 20자 이하인 메시지를 작성해줘.";
-      default:
-        prompt =
-            "나의 성격 : ${arr[0]}, 남에게 보이고 싶은 성격: ${arr[1]}, 메시지 받는 사람 : ${arr[3]}, 목적: ${arr[4]}, 상세목적: ${arr[5]}, 덧붙일 말: ${arr[5]} 인데 메시지를 작성해줘.";
-    }
     List<Object> presetText = [
-      {"role": "user", "content": prompt},
+      {
+        "role": "user",
+        "content":
+            "나의 성격 : ${arr[0]}, 남에게 보이고 싶은 성격: ${arr[1]}, 메시지 받는 사람 : ${arr[3]}, 목적: ${arr[4]}, 상세목적: ${arr[5]}, 덧붙일 말: ${arr[5]} 인데 메시지를 작성해줘."
+      },
     ];
 
     Map<String, dynamic> requestData = {
